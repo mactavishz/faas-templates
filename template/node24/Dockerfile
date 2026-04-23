@@ -7,11 +7,18 @@ ARG BUILDPLATFORM
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
 
-RUN apk --no-cache add curl ca-certificates \
-    && addgroup -S app && adduser -S -g app app
+RUN apt-get update -qy \
+    && if [ "${UPGRADE_PACKAGES}" = "true" ] || [ "${UPGRADE_PACKAGES}" = "1" ]; then apt-get upgrade -qy; fi \
+    && apt-get install -qy --no-install-recommends curl ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Add non root user
+RUN addgroup --system app \
+    && adduser app --system --ingroup app  --home /home/app \
+    && chown app:app /home/app
 
 # Turn down the verbosity to default level.
-ENV NPM_CONFIG_LOGLEVEL warn
+ENV NPM_CONFIG_LOGLEVEL=warn
 
 RUN chmod 777 /tmp
 
