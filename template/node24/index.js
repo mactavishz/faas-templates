@@ -128,6 +128,10 @@ const middleware = async (req, res) => {
     });
 };
 
+app.get('/health', (req, res) => {
+    res.status(200).send('ok');
+});
+
 app.use(middleware);
 
 const port = process.env.http_port || 3000;
@@ -135,5 +139,4 @@ const port = process.env.http_port || 3000;
 app.listen(port, () => {
     console.log(`node20 listening on port: ${port}`)
 });
-
 

@@ -69,6 +69,10 @@ def format_response(res):
 
     return res
 
+@app.route('/health', methods=['GET'])
+def health():
+    return ('ok', 200)
+
 @app.route('/', defaults={'path': ''}, methods=['GET', 'PUT', 'POST', 'PATCH', 'DELETE'])
 @app.route('/<path:path>', methods=['GET', 'PUT', 'POST', 'PATCH', 'DELETE'])
 def call_handler(path):
