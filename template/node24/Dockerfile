@@ -59,9 +59,9 @@ ENV mode="http"
 ENV upstream_url="http://127.0.0.1:3000"
 ENV ready_path="/health"
 
-ENV exec_timeout="10s"
-ENV write_timeout="15s"
-ENV read_timeout="15s"
+ENV exec_timeout="60s"
+ENV write_timeout="60s"
+ENV read_timeout="60s"
 
 ENV prefix_logs="false"
 

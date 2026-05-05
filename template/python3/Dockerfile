@@ -61,6 +61,10 @@ ENV mode="http"
 ENV upstream_url="http://127.0.0.1:5000"
 ENV ready_path="/health"
 
+ENV exec_timeout="60s"
+ENV write_timeout="60s"
+ENV read_timeout="60s"
+
 HEALTHCHECK --interval=5s CMD [ -e /tmp/.lock ] || exit 1
 
 CMD ["fwatchdog"]
